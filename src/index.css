@@ -135,8 +135,9 @@ button {
 }
 
 .pageHeader {
-  font-size: 2rem;
-  font-weight: 800;
+  font-size: 26px;
+  font-weight: 700;
+  margin-left: 0.5cm;
 }
 
 .navbar {
@@ -214,7 +215,9 @@ button {
 .forgotPasswordLink {
   cursor: pointer;
   color: #00cc66;
-  font-weight: 600;
+  font-weight: 400;
+  font-size: 16px;
+  margin-right: 0.5cm;
   text-align: right;
 }
 
@@ -242,6 +245,8 @@ button {
 
 .signInText,
 .signUpText {
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
   font-size: 1.5rem;
   font-weight: 700;
 }
@@ -255,6 +260,7 @@ button {
   height: 3rem;
   background-color: #00cc66;
   border-radius: 50%;
+  margin-right: 0.5cm;
 }
 @media (min-width: 1024px) {
   .signInButton,

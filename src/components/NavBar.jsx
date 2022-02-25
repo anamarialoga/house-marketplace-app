@@ -28,7 +28,7 @@ export const NavBar = () => {
                     <p style={focusIcon('/offers') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Offers</p>
                 </li>
                 <li className="navbarListItem" onClick={()=> navigate('/profile')}>
-                    <PersonOutlineIcon fill={focusIcon('/profile') ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
+                    <PersonOutlineIcon fill={(focusIcon('/profile')|| focusIcon('/signin')) ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
                     <p style={focusIcon('/profile') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Profile</p>
                 </li>
             </ul>

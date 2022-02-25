@@ -7,3 +7,4 @@ Technologies:
 
 Tools & PlugIns:
 * react-router v.6 
+* react-toastify

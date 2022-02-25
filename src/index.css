@@ -85,6 +85,17 @@ button {
   right: 20px;
 }
 
+.editPersonalDetails,.detail{
+  display:block;
+}
+.detail{
+  font-weight: 700;
+  font-size: 14px;
+  margin-left: 0.3cm;
+  margin-right: 0.5cm;
+}
+
+
 .pageContainer,
 .offers,
 .profile,
@@ -136,8 +147,8 @@ button {
 
 .pageHeader {
   font-size: 26px;
-  font-weight: 700;
-  margin-left: 0.5cm;
+  font-weight: 800;
+  margin-left: 0.3cm;
 }
 
 .navbar {
@@ -640,11 +651,11 @@ button {
   display: flex;
   justify-content: space-between;
   max-width: 500px;
+  margin-left: 0.3cm;
+  margin-right: 0.3cm;
+  font-weight: 700;
 }
 
-.personalDetailsText {
-  font-weight: 600;
-}
 
 .changePersonalDetails {
   cursor: pointer;
@@ -667,32 +678,23 @@ button {
 
 .profileName,
 .profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive,
-.profileNameActive {
+.profileAddress {
   all: unset;
   margin: 0.3rem 0;
-  font-weight: 600;
-  width: 100%;
-}
-.profileNameActive {
-  background-color: rgba(44, 44, 44, 0.1);
-}
-
-.profileEmail,
-.profileAddress,
-.profileAddressActive,
-.profileEmailActive {
+  font-size: 15px;
   font-weight: 500;
-}
-.profileEmailActive {
-  background-color: rgba(44, 44, 44, 0.1);
+  width: max-content;
 }
 
-.profileAddressActive {
-  background-color: rgba(44, 44, 44, 0.1);
+
+.profileNameInactive,
+.profileEmailInactive,
+.profileAddressInactive{
+  font-style: italic;
+  color: #8f8f8f;
 }
+
+
 
 .createListing {
   background-color: #ffffff;

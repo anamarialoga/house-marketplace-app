@@ -2,6 +2,9 @@ import React, { useState } from "react"
 import { Link, useNavigate } from "react-router-dom";
 import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRightIcon.svg'
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
+import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
+import { toast } from "react-toastify";
+
 
 export const SignIn = () => {
     const [showPass, setShowPass] = useState(false);
@@ -18,9 +21,25 @@ export const SignIn = () => {
             //use the id from the inputs so we can change the value based on that; email/password
         }))
     }
-
     // console.log(showPass);
     // console.log(formData);
+
+    const onSubmit = async (e) =>{
+        e.preventDefault();
+        try{
+            const auth = getAuth();
+            const userCredential  = await signInWithEmailAndPassword(auth, formData.email, formData.password);
+
+            if(userCredential.user){
+                navigate('/');
+            }
+
+            console.log(userCredential.user.displayName, " authenticated");
+
+        }catch(error){
+            toast.error('Bad user credentials!');
+        }
+    }
 
     return (
         <>
@@ -41,7 +60,7 @@ export const SignIn = () => {
                 <Link to='/forgotPassword' className="forgotPasswordLink">Forgot Password</Link>
                 <div className="signInBar">
                     <p className="signInText" style={{fontSize: '23px', fontWeight: '650'}}>Sign In</p>
-                    <button className="signInButton">
+                    <button onClick={onSubmit} className="signInButton">
                         <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
                     </button>
                 </div>          

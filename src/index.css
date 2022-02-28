@@ -148,7 +148,29 @@ button {
 .pageHeader {
   font-size: 26px;
   font-weight: 800;
-  margin-left: 0.3cm;
+  margin-left: 0.5cm;
+  margin-top: 1cm;
+  margin-bottom: 3rem;
+  padding: 1rem;
+}
+
+.profileHeader {
+  font-size: 26px;
+  font-weight: 800;
+  margin-left: 0.1cm;
+  padding: 1rem;
+  margin-bottom: 3rem;
+}
+
+
+.exploreHeader,
+.categoryHeader {
+  font-size: 26px;
+  font-weight: 800;
+  margin-left: 0.1cm;
+  margin-top: 1cm;
+  margin-bottom: 3rem;
+  padding: 1rem;
 }
 
 .navbar {
@@ -208,13 +230,16 @@ button {
 
 .passwordInputDiv,
 .emailInputDiv {
-  margin-left: 0.5cm;
+  position: relative;
   margin-right: 0.5cm;
+  margin-left: 0.5cm;
 }
 
 .passwordInput {
   margin-bottom: 2rem;
   background: url('./assets/svg/lockIcon.svg') #ffffff 2.5% center no-repeat;
+  top: 0;
+  left:0;
 }
 
 .showPassword {
@@ -242,6 +267,14 @@ button {
   position: inherit;
 }
 
+.profileBar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+  margin-right: 0.5cm;
+}
+
 .signInAuthBar{
   display: flex;
   justify-content: space-between;
@@ -250,13 +283,21 @@ button {
   margin-right: 0.25cm;
 }
 
-.resetPassBar,
 .signUpBar {
   margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: inherit;
+}
+
+.resetPassBar{
+  margin-top: 1.5rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+  margin-left: 0.1cm;
 }
 
 .signInButton,
@@ -271,7 +312,11 @@ button {
   .signInBar,
   .signUpBar,
   .resetPassBar {
-    justify-content: start;
+    margin-top: 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: inherit;
   }
 }
 
@@ -366,10 +411,8 @@ button {
 .exploreHeading,
 .exploreCategoryHeading {
   font-weight: 700;
-}
-
-.exploreCategoryHeading {
-  margin-top: 3rem;
+  margin-left: 0.2cm;
+  padding-left: 1rem;
 }
 
 .swiper-container {
@@ -430,7 +473,7 @@ button {
   display: flex;
   justify-content: space-between;
 }
-.exploreCategories a {
+.exploreCategories a{
   width: 48%;
 }
 
@@ -445,7 +488,7 @@ button {
 
 .exploreCategoryName {
   font-weight: 500;
-  text-align: left;
+  text-align: center;
 }
 
 .category {
@@ -453,7 +496,8 @@ button {
 }
 
 .categoryListings {
-  padding: 0;
+  padding: 1rem;
+  margin-left: 0.2cm;
 }
 
 .categoryListing {
@@ -669,11 +713,6 @@ button {
   margin-bottom: 10rem;
 }
 
-.profileHeader {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
 
 .logOut {
   cursor: pointer;
@@ -689,9 +728,8 @@ button {
 .profileDetailsHeader {
   display: flex;
   justify-content: space-between;
-  max-width: 500px;
-  margin-left: 0.3cm;
-  margin-right: 0.3cm;
+  margin-left: 0.2cm;
+  margin-right: 0.6cm;
   font-weight: 700;
 }
 
@@ -707,7 +745,8 @@ button {
   border-radius: 1rem;
   padding: 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
-  max-width: 500px;
+  margin-right: 0.5cm;
+  margin-left: 0.1cm;
 }
 
 .profileDetails {
@@ -719,7 +758,6 @@ button {
 .profileEmail,
 .profileAddress {
   all: unset;
-  margin: 0.3rem 0;
   font-size: 15px;
   font-weight: 500;
   width: 100%;

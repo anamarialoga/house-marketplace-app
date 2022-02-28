@@ -41,8 +41,8 @@ export const Profile = () => {
 
     return (formData.name !== '') ? ( 
         <div className="profile">
-            <header className="profileHeader">
-                <p className="pageHeader">My Profile</p>
+            <header className="profileBar">
+                <p className="profileHeader" >My Profile</p>
                     <button onClick={onLogOut} className="logOut">
                         Log Out
                     </button>

@@ -26,11 +26,11 @@ export const ForgotPassword  = () => {
     return (
         <div className="pageContainer">
             <header>
-                <p className="pageHeader" style={{marginLeft: '0cm'}}>Forgot Password</p>
+                <p className="exploreHeader">Forgot Password</p>
             </header>
             <main>
                 <form>
-                <div  style={{marginRight: '0.09cm', marginLeft: '0.09cm'}}>
+                <div  style={{ marginLeft: '0.09cm'}}>
                 <input  type={'email'} id='email' value={email} className='emailInput' placeholder="E-mail" onChange={onChange}/>
                 </div>
                     <div className="resetPassBar" >
@@ -43,7 +43,7 @@ export const ForgotPassword  = () => {
                     </div>
                 </form>
                 <div >
-                    <Link to='/signin' style={{color:  '#00cc66', fontSize: '16px'}}>
+                    <Link to='/signin' style={{color:  '#00cc66', fontSize: '16px', marginLeft: '0.1cm'}}>
                         Did you reset? Sign in
                     </Link>
                 </div>

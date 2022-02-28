@@ -20,16 +20,16 @@ export const NavBar = () => {
         <nav className="navbarNav">
             <ul className="navbarListItems">
                 <li className="navbarListItem" onClick={()=> navigate('/')}>
-                    <ExploreIcon fill={focusIcon('/') ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
-                    <p style={focusIcon('/') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Explore</p>
+                    <ExploreIcon fill={focusIcon('/') || focusIcon('/category/rent') || focusIcon('/category/sell') ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
+                    <p style={focusIcon('/') || focusIcon('/category/rent') || focusIcon('/category/sell') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Explore</p>
                 </li>
                 <li className="navbarListItem" onClick={()=> navigate('/offers')}>
                     <OfferIcon fill={focusIcon('/offers') ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
                     <p style={focusIcon('/offers') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Offers</p>
                 </li>
                 <li className="navbarListItem" onClick={()=> navigate('/profile')}>
-                    <PersonOutlineIcon fill={(focusIcon('/profile')|| focusIcon('/signin')) ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
-                    <p style={focusIcon('/profile') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Profile</p>
+                    <PersonOutlineIcon fill={(focusIcon('/profile')|| focusIcon('/signin') || focusIcon('/signup') || focusIcon('/forgotpass')) ? '#2c2c2c':'#8f8f8f'} width='36px' height='36px' />
+                    <p style={focusIcon('/profile') || focusIcon('/signin') || focusIcon('/signup') || focusIcon('/forgotpass') ? {color: '#2c2c2c'}:{color:'#8f8f8f' , marginTop: '0.25rem', fontSize: '14px', fontWeight: 600}}>Profile</p>
                 </li>
             </ul>
         </nav>

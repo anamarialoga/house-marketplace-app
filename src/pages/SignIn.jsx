@@ -54,10 +54,23 @@ export const SignIn = () => {
                 <div  className="emailInputDiv">
                 <input  type={'email'} id='email' value={formData.email} className='emailInput' placeholder="E-mail" onChange={handleObjState}/>
                 </div>
-                <div className="passwordInputDiv">
-                    <input type={'password'} id='password' value={formData.password} className='passwordInput' placeholder="Password" onChange={handleObjState}/>
-                    <img src = {visibilityIcon} alt="visibility" className="showPassword" onClick={()=>setShowPass(!showPass)}/>
-                </div>
+                <div className='passwordInputDiv'>
+                    <  input
+                    type={showPass ? 'text' : 'password'}
+                    className='passwordInput'
+                    placeholder='Password'
+                    id='password'
+                    value={formData.password}
+                    onChange={handleObjState}
+                    />
+
+                    <img
+                    src={visibilityIcon}
+                    alt='show password'
+                    className='showPassword'
+                    onClick={() => setShowPass(!showPass)}
+                    />
+          </div>
                 <Link to='/forgotpass' className="forgotPasswordLink">Forgot Password</Link>
                 <div style={{display: 'block'}}>
                     <div className="signInBar">

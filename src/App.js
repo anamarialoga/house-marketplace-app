@@ -3,6 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { ToastContainer } from "react-toastify";
 import 'react-toastify/dist/ReactToastify.css';
 import { NavBar } from "./components/NavBar";
+import { Category } from "./pages/Category";
 import { Explore } from "./pages/Explore";
 import { ForgotPassword } from "./pages/ForgotPassword";
 import { Offers } from "./pages/Offers";
@@ -17,6 +18,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Explore/>} />
         <Route path="/offers" element={<Offers/>}/>
+        <Route path="/category/:categoryName" element={<Category/>}/>
         <Route path="/profile" element={<Profile/>}/>
         <Route path="/signin" element={<SignIn/>}/>
         <Route path="/signup" element={<SignUp/>}/>

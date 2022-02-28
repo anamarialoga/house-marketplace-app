@@ -95,7 +95,6 @@ button {
   margin-right: 0.5cm;
 }
 
-
 .pageContainer,
 .offers,
 .profile,
@@ -104,6 +103,7 @@ button {
 .explore {
   margin: 1rem;
 }
+
 @media (min-width: 1024px) {
   .pageContainer,
   .offers,
@@ -206,8 +206,10 @@ button {
   background: url('./assets/svg/personIcon.svg') #ffffff 2.5% center no-repeat;
 }
 
-.passwordInputDiv {
-  position: relative;
+.passwordInputDiv,
+.emailInputDiv {
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
 }
 
 .passwordInput {
@@ -232,9 +234,25 @@ button {
   text-align: right;
 }
 
-.signInBar,
-.signUpBar {
+.signInBar{
   margin-top: 3rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+}
+
+.signInAuthBar{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: inherit;
+  margin-right: 0.25cm;
+}
+
+.resetPassBar,
+.signUpBar {
+  margin-top: 1.5rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -243,13 +261,16 @@ button {
 
 .signInButton,
 .signUpButton,
+.resetPassButton,
 .signInText,
-.signUpText {
+.signUpText,
+.resetPassText {
   cursor: pointer;
 }
 @media (min-width: 1024px) {
   .signInBar,
-  .signUpBar {
+  .signUpBar,
+  .resetPassBar {
     justify-content: start;
   }
 }
@@ -258,8 +279,22 @@ button {
 .signUpText {
   margin-left: 0.5cm;
   margin-right: 0.5cm;
-  font-size: 1.5rem;
-  font-weight: 700;
+  font-size: 23px;
+  font-weight: 650;
+}
+
+.signInAuthText {
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+  font-size: 16px;
+  font-weight: 650;
+}
+
+.resetPassText{
+  margin-left: 0cm;
+  margin-right: 0cm;
+  font-size: 21px;
+  font-weight: 650;
 }
 
 .signInButton,
@@ -273,36 +308,40 @@ button {
   border-radius: 50%;
   margin-right: 0.5cm;
 }
+
+.signInAuthButton{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 0.7cm;
+  height: 0.7cm;
+  background-color: whitesmoke;
+  border-radius: 50%;
+  margin-right: 0.5cm;
+}
+
+.resetPassButton {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 3rem;
+  height: 3rem;
+  background-color: #00cc66;
+  border-radius: 50%;
+  margin-right: 0.05cm;
+}
+
 @media (min-width: 1024px) {
   .signInButton,
-  .signUpButton {
+  .signUpButton,
+  .resetPassButton {
     margin-left: 3rem;
   }
 }
 
-.socialLogin {
-  margin-top: 4rem;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-
-.socialIconDiv {
-  cursor: pointer;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0.75rem;
-  margin: 1.5rem;
-  width: 3rem;
-  height: 3rem;
-  background-color: #ffffff;
-  border-radius: 50%;
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.1);
-}
-
 .socialIconImg {
-  width: 100%;
+  width: 0.5cm;
+  height: 0.5cm;
 }
 
 .registerLink {
@@ -683,7 +722,7 @@ button {
   margin: 0.3rem 0;
   font-size: 15px;
   font-weight: 500;
-  width: max-content;
+  width: 100%;
 }
 
 

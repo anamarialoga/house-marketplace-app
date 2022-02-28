@@ -6,6 +6,7 @@ import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase
 import {db} from '../firebase.config.js';
 import { doc, setDoc, serverTimestamp } from "firebase/firestore"; 
 import { toast } from "react-toastify";
+import { OAuth } from "../components/OAuth";
 
 export const SignUp = () => {
     const [showPass, setShowPass] = useState(false);
@@ -49,7 +50,7 @@ export const SignUp = () => {
             await setDoc(doc(db, 'users', user.uid), formDataCopy)
 
             console.log(userCredential.user.displayName, " registered");
-
+            toast.success("Registered with success!")
             navigate('/');
         }catch(error){
             toast.error('Something went wrong!');
@@ -65,23 +66,24 @@ export const SignUp = () => {
                 </p>
             </header>
             <form >
-                <div  style={{marginRight: '0.5cm', marginLeft: '0.5cm'}}>
+                <div  className="emailInputDiv">
                 <input  type={'text'} id='name' value={formData.name} className='nameInput' placeholder="Name" onChange={handleObjState}/>
                 <input  type={'email'} id='email' value={formData.email} className='emailInput' placeholder="E-mail" onChange={handleObjState}/>
                 </div>
-                <div className="passwordInputDiv" style={{marginRight: '0.5cm', marginLeft:'0.5cm'}}>
+                <div className="passwordInputDiv">
                     <input type={'password'} id='password' value={formData.password} className='passwordInput' placeholder="Password" onChange={handleObjState}/>
                     <img src = {visibilityIcon} alt="visibility" className="showPassword" onClick={()=>setShowPass(!showPass)}/>
                 </div>
                 <div className="signUpBar">
-                    <p className="signUpText" style={{fontSize: '23px', fontWeight: '650'}}>Sign Up</p>
+                    <p className="signUpText">Sign Up</p>
                     <button onClick = {onSubmit} className="signUpButton">
                         <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
                     </button>
-                </div>          
+                </div>
+                <OAuth />          
             </form>
             <div style={{marginLeft: '0.5cm'}}>
-                <Link to='/SignIn' style={{color:  '#00cc66', fontSize: '16px'}}>
+                <Link to='/signin' style={{color:  '#00cc66', fontSize: '16px'}}>
                     Already having an account? Sign in
                 </Link>
             </div>

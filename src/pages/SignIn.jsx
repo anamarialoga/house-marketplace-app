@@ -4,6 +4,7 @@ import {ReactComponent as ArrowRightIcon} from '../assets/svg/keyboardArrowRight
 import visibilityIcon from '../assets/svg/visibilityIcon.svg'
 import { getAuth, signInWithEmailAndPassword } from "firebase/auth";
 import { toast } from "react-toastify";
+import { OAuth } from "../components/OAuth";
 
 
 export const SignIn = () => {
@@ -50,23 +51,26 @@ export const SignIn = () => {
                 </p>
             </header>
             <form>
-                <div  style={{marginRight: '0.5cm', marginLeft: '0.5cm'}}>
+                <div  className="emailInputDiv">
                 <input  type={'email'} id='email' value={formData.email} className='emailInput' placeholder="E-mail" onChange={handleObjState}/>
                 </div>
-                <div className="passwordInputDiv" style={{marginRight: '0.5cm', marginLeft:'0.5cm'}}>
+                <div className="passwordInputDiv">
                     <input type={'password'} id='password' value={formData.password} className='passwordInput' placeholder="Password" onChange={handleObjState}/>
                     <img src = {visibilityIcon} alt="visibility" className="showPassword" onClick={()=>setShowPass(!showPass)}/>
                 </div>
-                <Link to='/forgotPassword' className="forgotPasswordLink">Forgot Password</Link>
-                <div className="signInBar">
-                    <p className="signInText" style={{fontSize: '23px', fontWeight: '650'}}>Sign In</p>
-                    <button onClick={onSubmit} className="signInButton">
-                        <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
-                    </button>
-                </div>          
-            </form>
+                <Link to='/forgotpass' className="forgotPasswordLink">Forgot Password</Link>
+                <div style={{display: 'block'}}>
+                    <div className="signInBar">
+                        <p className="signInText">Sign In</p>
+                        <button onClick={onSubmit} className="signInButton">
+                            <ArrowRightIcon fill='#ffffff' width='34px' height='34px'/>
+                        </button>      
+                    </div>
+                    <OAuth/>
+                </div>   
+            </form> 
             <div style={{marginLeft: '0.5cm'}}>
-                <Link to='/SignUp' style={{color:  '#00cc66', fontSize: '16px'}}>
+                <Link to='/signup' style={{color:  '#00cc66', fontSize: '16px'}}>
                     Not having an account yet? Sign up
                 </Link>
             </div>

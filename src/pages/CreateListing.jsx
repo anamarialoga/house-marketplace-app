@@ -67,6 +67,7 @@ export const CreateListing  = () => {
     const onSubmit = (e) => {
         e.preventDefault();
         console.log(formData);
+        navigate('/profile');
     }
 
     const onMutate = (e) => {

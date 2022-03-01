@@ -4,6 +4,7 @@ import { db } from "../firebase.config"
 import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Spinner } from "../components/Spinner"
+import { ListingItem } from "../components/ListingItem"
 
 export const Category= () => {
     const [listings, setListings] = useState([]);
@@ -40,23 +41,22 @@ export const Category= () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [params.categoryName]);
 
-    return (
-        <div className="category">
+    return (loading) ? <Spinner/> :
+    (loading === false && listings.length ===0) ? 
+    <div className="categoryListings">No items to display</div> :  
+        (<div className="category">
             <header>
                 <p className="categoryHeader">
                     {
                         params.categoryName === 'sell' ? 'Houses for sale' : "Houses for rental"
                     }
                 </p>
-            </header>
-            {loading && listings.length > 0 ? <Spinner/> :
-            listings.length===0 ? <div className="categoryListings">No items to display</div> :  
+            </header>  
                 <ul className="categoryListings">
                     {listings.map((listing)=>(
-                            <h3 key={listing.id}>{listing.data.name}</h3>
+                           <ListingItem item={listing} key={listing.id}/>
                     ))}
                 </ul>
-            }
         </div>
     )
 }

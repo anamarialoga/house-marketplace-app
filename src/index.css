@@ -778,7 +778,9 @@ button {
   border-radius: 1rem;
   padding: 0.25rem 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
-  margin-top: 2rem;
+  margin-top: 4rem;
+  margin-left: 0.1cm;
+  margin-right: 0.5cm;
   font-weight: 600;
   max-width: 500px;
   display: flex;

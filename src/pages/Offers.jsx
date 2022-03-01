@@ -1,11 +1,9 @@
 import React, { useEffect, useState } from "react"
 import { collection, getDocs, query, where, orderBy, limit } from "firebase/firestore"
 import { db } from "../firebase.config"
-import { useParams } from "react-router-dom"
 import { toast } from "react-toastify"
 import { Spinner } from "../components/Spinner"
 import { ListingItem } from "../components/ListingItem"
-import houseSale from '../assets/jpg/houseSale.png' 
 import {BsCashCoin} from "react-icons/bs"
 
 export const Offers= () => {

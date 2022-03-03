@@ -900,6 +900,13 @@ button {
   margin-top: 5rem;
 }
 
+.createListingCancelButton{
+  margin-top: 1rem;
+  background-color: white;
+  color: black;
+  font-weight: 600;
+}
+
 .offers {
   margin-bottom: 10rem;
 }

@@ -2,9 +2,14 @@ import { useEffect, useRef, useState } from "react"
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
 import { useNavigate } from "react-router-dom";
 import { Spinner } from "../components/Spinner";
+import { toast } from "react-toastify";
+import { getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
+import {v4 as uuidv4} from 'uuid'
+import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
+import {db} from '../firebase.config'
 
 export const CreateListing  = () => {
-    const [geolocation, setGeolocation] = useState(true);
+    const [geolocationActive, setGeolocationActive] = useState(true);
     const [loading, setLoading] = useState(true);
     const [formData, setFormData] = useState({
         type: 'sell',
@@ -17,9 +22,10 @@ export const CreateListing  = () => {
         offer: false,
         regularPrice: 0,
         discountedPrice: 0,
-        images: {},
+        images: [],
         latitude: 0,
         longitude: 0, 
+        geoloc: true, 
     });
 
     //destructure listing
@@ -37,12 +43,14 @@ export const CreateListing  = () => {
         images,
         latitude,
         longitude, 
+        geoloc
     } = formData;
 
     const auth= getAuth();
     const navigate = useNavigate();
     const isMounted = useRef(true);
-    console.log(auth.currentUser.displayName);
+    //console.log(auth.currentUser?.displayName);
+
     useEffect(()=>{
         //if the user is authenticated
         if(isMounted){
@@ -64,10 +72,119 @@ export const CreateListing  = () => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isMounted])
 
-    const onSubmit = (e) => {
+    const storeImage = async (image) => {
+        return new Promise((resolve, reject) => {
+          // ACCESS STORAGE
+          const storage = getStorage()
+          // WHAT DO WE STORE?
+          const fileName = `${auth.currentUser.uid}-${image.name}-${uuidv4()}`
+          // WHERE DO WE STORE?
+          const storageRef = ref(storage, 'images/' + fileName)
+          const uploadTask = uploadBytesResumable(storageRef, image)
+  
+          uploadTask.on(
+            'state_changed',
+            (snapshot) => {
+              const progress =
+                (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+              console.log('Upload is ' + progress + '% done')
+              switch (snapshot.state) {
+                case 'paused':
+                  console.log('Upload is paused')
+                  break
+                case 'running':
+                  console.log('Upload is running')
+                  break
+                default:
+                  break
+              }
+            },
+            (error) => {
+              reject(error)
+            },
+            () => {
+              // Handle successful uploads on complete
+              // For instance, get the download URL: https://firebasestorage.googleapis.com/...
+              getDownloadURL(uploadTask.snapshot.ref).then((downloadURL) => {
+                resolve(downloadURL)
+              })
+            }
+          )
+        })
+    }
+
+    const onSubmit = async (e) => {
         e.preventDefault();
-        console.log(formData);
-        navigate('/profile');
+        //console.log(formData);
+        if(offer && (discountedPrice>=regularPrice)){
+            setLoading(false);
+            toast.error("The regular price must be higher than the discounted price!");
+        }else if(images.length>6 || images.length<1){
+            setLoading(false);
+            toast.error("You must upload at least 1 image, but not more than 6!");
+        }else if(name === ''){
+            setLoading(false);
+            toast.error('You must enter a name for your listing!');
+        }
+
+        let geolocation={};
+        let location;
+
+        if(geolocationActive === true){
+            const resp = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCU8A9UY3mqht9a8h9ZAPpvnWoSrvtoZzw`)
+            const data = await resp.json();
+            // console.log(data);
+            geolocation.lat=data.results[0]?.geometry.location.lat ?? 0;
+            geolocation.long=data.results[0]?.geometry.location.lng ?? 0;
+
+            if (data.status === 'ZERO_RESULTS'){
+                location='';
+            } else {
+                location=data.results[0]?.formatted_address;
+            }
+            if(location===''){
+                setLoading(false);
+                toast.error('Please enter a valid address!');
+            }
+        }
+        else{
+            geolocation.lat=latitude;
+            geolocation.long= longitude;
+            location = address; 
+        }
+
+
+        const imgUrls = await Promise.all(
+            [...images].map((image) => storeImage(image))
+          ).catch(() => {
+            setLoading(false)
+            toast.error('Images not uploaded')
+            return
+          })
+        //console.log(imgUrls);
+
+        // A COPY OF THE FORMDATA WILL BE STORED AS A LISTING
+        const listingCopy = {
+            ...formData,
+            //ADDING ImgUrls , timestamp PARAMS TO THE OBJ
+            imgUrls, 
+            timestamp: serverTimestamp()
+        }
+        //console.log(location);
+
+        //REMOVE UNWANTED PARAMS FROM THE OBJ WE UPLOAD
+        delete listingCopy.images
+        delete listingCopy.address
+        delete listingCopy.geoloc
+        !listingCopy.offer && delete listingCopy.discountedPrice
+        //ADD A HUMAN-FRIENDLY LOCATION STRING TO THE OBJ
+        location && (listingCopy.location=location)
+
+        //ADD THE NEW OBJ TO THE COLLECTION
+        const docRef = await addDoc(collection(db, 'listings'), listingCopy);
+        setLoading(false);
+        toast.success("Your listing has been uploaded!")
+        navigate(`/category/${listingCopy.type}/${docRef.id}`);
     }
 
     const onMutate = (e) => {
@@ -82,6 +199,23 @@ export const CreateListing  = () => {
         }
         if(!e.target.files){
             setFormData((prevState)=> ({...prevState, [e.target.id]: boolean ?? e.target.value}))
+        }
+    }
+
+    const onSetLocationServices = (e) => {
+        //console.log(typeof e.target.value, e.target.value);
+        let bool=null;
+        if(e.target.value === 'true'){
+            bool=true;
+        }
+        if(e.target.value === 'false'){
+            bool=false;
+        }
+        setFormData((prevState)=>({...prevState, [e.target.id]: bool ?? e.target.value }))
+        if(bool === false){
+            setGeolocationActive(false);
+        }else if (bool === true){
+            setGeolocationActive(true);
         }
     }
 
@@ -219,7 +353,29 @@ export const CreateListing  = () => {
                         required
                     />
 
-                    {!geolocation && (
+                    <label className='formLabel'>Turn on location services</label>
+                    <div className='formButtons'>
+                        <button
+                        className={geoloc ? 'formButtonActive' : 'formButton'}
+                        type='button'
+                        id='geoloc'
+                        value={true}
+                        onClick={onSetLocationServices}
+                        >
+                        Accept
+                        </button>
+                        <button
+                        className={!geoloc ? 'formButtonActive' : 'formButton'}
+                        type='button'
+                        id='geoloc'
+                        value={false}
+                        onClick={onSetLocationServices}
+                        >
+                        Decline
+                        </button>
+                    </div>
+
+                    {!geolocationActive && (
                         <div className='formLatLng flex'>
                         <div>
                             <label className='formLabel'>Latitude</label>
@@ -321,8 +477,14 @@ export const CreateListing  = () => {
                     onClick={onSubmit}>
                         Create Listing
                     </button>
+                    <button 
+                    type='cancel' 
+                    className='primaryButton createListingCancelButton' 
+                    onClick={()=>{navigate('/profile')}}>
+                        Cancel
+                    </button>
                 </form>
             </main>
         </div>
     )
-}
+};

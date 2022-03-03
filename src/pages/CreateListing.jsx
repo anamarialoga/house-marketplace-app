@@ -8,6 +8,8 @@ import {v4 as uuidv4} from 'uuid'
 import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
 import {db} from '../firebase.config'
 
+const API_URL="AIzaSyCU8A9UY3mqht9a8h9ZAPpvnWoSrvtoZzw"
+
 export const CreateListing  = () => {
     const [geolocationActive, setGeolocationActive] = useState(true);
     const [loading, setLoading] = useState(true);
@@ -49,7 +51,7 @@ export const CreateListing  = () => {
     const auth= getAuth();
     const navigate = useNavigate();
     const isMounted = useRef(true);
-    //console.log(auth.currentUser?.displayName);
+    console.log("User:", auth.currentUser?.displayName);
 
     useEffect(()=>{
         //if the user is authenticated
@@ -131,9 +133,9 @@ export const CreateListing  = () => {
         let location;
 
         if(geolocationActive === true){
-            const resp = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=AIzaSyCU8A9UY3mqht9a8h9ZAPpvnWoSrvtoZzw`)
+            const resp = await fetch(`https://maps.googleapis.com/maps/api/geocode/json?address=${address}&key=${API_URL}`)
             const data = await resp.json();
-            // console.log(data);
+            console.log(data);
             geolocation.lat=data.results[0]?.geometry.location.lat ?? 0;
             geolocation.long=data.results[0]?.geometry.location.lng ?? 0;
 
@@ -184,6 +186,10 @@ export const CreateListing  = () => {
         const docRef = await addDoc(collection(db, 'listings'), listingCopy);
         setLoading(false);
         toast.success("Your listing has been uploaded!")
+
+        console.log(docRef.id);
+        console.log(listingCopy.id);
+
         navigate(`/category/${listingCopy.type}/${docRef.id}`);
     }
 

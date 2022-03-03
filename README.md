@@ -6,6 +6,7 @@ Technologies:
 * DataBase - FireStore 
 
 Tools & PlugIns:
-* google cloud platform for GeoLocation API & Service 
 * react-router v.6 
 * react-toastify
+* google cloud platform for GeoLocation API & Service 
+The token for the geolocation service can be changed in the CreateListing.jsx file

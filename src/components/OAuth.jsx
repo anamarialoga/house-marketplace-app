@@ -13,7 +13,7 @@ export const OAuth = () => {
     const onGoogleClickUp = async (e)=>{
         e.preventDefault();
         try{
-            const auth = getAuth();
+            const auth = getAuth().onAuthStateChanged();
             const provider = new GoogleAuthProvider();
             const result = await signInWithPopup(auth, provider);
             const user = result.user;

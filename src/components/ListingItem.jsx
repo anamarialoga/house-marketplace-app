@@ -8,7 +8,7 @@ export const ListingItem = ({item, onDelete}) => {
         <li className='categoryListing'>
             <Link to={`category/${item.data.type}/${item.id}`} className='categoryListingLink'>
                 <img 
-                    src={item?.data?.imgUrls[1]} 
+                    src={item.data.imgUrls[0]} 
                     alt={item.data.name}
                     className='categoryListingImg'
                 />

@@ -187,10 +187,9 @@ export const CreateListing  = () => {
         setLoading(false);
         toast.success("Your listing has been uploaded!")
 
-        console.log(docRef.id);
-        console.log(listingCopy.id);
-
-        navigate(`/category/${listingCopy.type}/${docRef.id}`);
+        console.log("user:", auth.currentUser?.displayName);
+        //navigate(`/category/${listingCopy.type}/${docRef.id}`);
+        navigate('/profile')
     }
 
     const onMutate = (e) => {
@@ -486,7 +485,7 @@ export const CreateListing  = () => {
                     <button 
                     type='cancel' 
                     className='primaryButton createListingCancelButton' 
-                    onClick={()=>{navigate('/profile')}}>
+                    onClick={()=>{navigate('/profile'); }}>
                         Cancel
                     </button>
                 </form>

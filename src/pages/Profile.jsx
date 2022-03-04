@@ -24,6 +24,8 @@ export const Profile = () => {
         navigate('/signin');
     }
 
+    if(auth.currentUser.displayName !== undefined) console.log("user:", auth?.currentUser?.displayName);
+
     const onSubmit = async () => {
         try{
             if(auth.currentUser.displayName !== name)

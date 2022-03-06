@@ -12,8 +12,8 @@ export const Profile = () => {
     const auth= getAuth();
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        name: auth.currentUser ? auth.currentUser.displayName : '',
-        email:auth.currentUser ? auth.currentUser.email : '',
+        name: auth.currentUser ? auth.currentUser?.displayName : '',
+        email:auth.currentUser ? auth.currentUser?.email : '',
     });
     const [changeDetails, setChangeDetails] = useState(false);
     const {name, email} = formData;
@@ -24,7 +24,7 @@ export const Profile = () => {
         navigate('/signin');
     }
 
-    if(auth.currentUser.displayName !== undefined) console.log("user:", auth?.currentUser?.displayName);
+    if(auth?.currentUser?.displayName !== undefined) console.log("user:", auth?.currentUser?.displayName);
 
     const onSubmit = async () => {
         try{

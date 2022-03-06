@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React from "react"
 import { Link } from "react-router-dom"
 import rentCategory from '../assets/jpg/rentCategory.jpg'
 import sellCategory from '../assets/jpg/sellCategory.jpg'

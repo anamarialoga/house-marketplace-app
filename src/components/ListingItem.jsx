@@ -3,13 +3,8 @@ import {ReactComponent as EditIcon} from '../assets/svg/editIcon.svg'
 import bedIcon from '../assets/svg/bedIcon.svg'
 import bathtubIcon from '../assets/svg/bathtubIcon.svg'
 import { Link } from 'react-router-dom'
-import { getAuth } from 'firebase/auth'
 
 export const ListingItem = ({item, onDelete, onEdit}) => {
-
-    const auth = getAuth();
-
-
     return ( 
         <>
 

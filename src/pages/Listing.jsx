@@ -111,11 +111,6 @@ export const Listing = () => {
                         {/* <Popup>{listing.location}</Popup> */}
                     </MapContainer>
                 </div>
-
-                <button className="primaryButton" onClick={()=>{navigate(`/category/${listing.type}`)}}>
-                    Back
-                </button> 
-                <br/>
                 {auth.currentUser?.uid !== listing.userRef && (
                     <Link to={`/contact/${listing.userRef}?listingName=${listing.name}`} className='primaryButton'>
                         Contact Landlord

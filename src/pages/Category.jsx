@@ -94,7 +94,7 @@ export const Category= () => {
                     Back
         </button> 
     </div> :  
-        (<div className="category">
+        (<div className="category" >
             <header>
                 <p className="exploreHeader">
                     {
@@ -102,7 +102,7 @@ export const Category= () => {
                     }
                 </p>
             </header>  
-            <ul className="categoryListings">
+            <ul className="categoryListings " style={{marginLeft:'0.5cm'}}>
                     {listings.map((listing)=>(
                            <ListingItem item={listing} key={listing.id}/>
                     ))}

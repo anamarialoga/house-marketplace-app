@@ -94,7 +94,7 @@ export const Offers= () => {
                         <BsCashCoin/>
                     </button>
                 </header>
-                <ul className="categoryListings">
+                <ul className="categoryListings" style={{marginLeft:'0.5cm'}}>
                     {listings.map((listing)=>(
                            <ListingItem item={listing} key={listing.id}/>
                     ))}

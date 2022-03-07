@@ -112,10 +112,6 @@ export const Category= () => {
               Load More
             </p>
             )}
-            <br/>
-            <button className="primaryButton" onClick={()=>{navigate('/')}}>
-                    Back
-            </button> 
         </div>
     )
 }

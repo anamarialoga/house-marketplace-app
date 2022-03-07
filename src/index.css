@@ -515,13 +515,21 @@ button {
 }
 
 .categoryListingImg {
-  width: 30%;
-  height: 120px;
+  width: 35%;
+  height: 110px;
   border-radius: 1.5rem;
   object-fit: cover;
   margin-right: 0.5cm;
+}
+
+.toRight{
+  margin-left: 0.5cm;
+}
+
+.toLeft {
   margin-left: -0.3cm;
 }
+
 @media (min-width: 1024px) {
   .categoryListingImg {
     width: 19%;

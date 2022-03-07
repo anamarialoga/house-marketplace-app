@@ -23,7 +23,7 @@ export const ListingItem = ({item, onDelete, onEdit}) => {
                 <img 
                     src={item?.data?.imgUrls[0]} 
                     alt={item?.data?.name}
-                    className='categoryListingImg'
+                    className={auth.currentUser.uid !== item.data.userRef ? 'categoryListingImg toRight' : 'categoryListingImg toLeft'}
                 />
                 <div className='categoryListingDetails'>
                     <p className='categoryListingLocation'>

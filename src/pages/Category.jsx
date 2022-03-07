@@ -60,7 +60,7 @@ export const Category= () => {
         where('type', '==', params.categoryName),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
-        limit(10)
+        limit(3)
       )
       // Execute query
       const querySnap = await getDocs(q)

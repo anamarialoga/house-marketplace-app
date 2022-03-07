@@ -21,7 +21,7 @@ export const Offers= () => {
                     listingsRef, 
                     where('offer', '==', true), 
                     orderBy('timestamp', 'desc'), 
-                    limit(10));
+                    limit(3));
                 //execute the query
                 const querySnap = await getDocs(q);
                 //save the last fetched listing

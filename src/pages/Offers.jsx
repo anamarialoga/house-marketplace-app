@@ -58,7 +58,7 @@ export const Offers= () => {
         where('offer', '==', true),
         orderBy('timestamp', 'desc'),
         startAfter(lastFetchedListing),
-        limit(10)
+        limit(3)
       )
       // Execute query
       const querySnap = await getDocs(q)

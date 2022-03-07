@@ -14,16 +14,15 @@ export const ListingItem = ({item, onDelete, onEdit}) => {
         <>
 
         <li className='categoryListing'>
-        {auth.currentUser.uid === item.data.userRef ? 
-        (<div style={{display: 'block', justifyContent: 'space-between', marginLeft:'-0.3cm'}}>
+        <div style={{display: 'block', justifyContent: 'space-between', marginLeft:'-0.3cm'}}>
             {onDelete && <DeleteIcon onClick={()=>onDelete(item?.id, item?.data?.name)}/>}
             {onEdit && <EditIcon onClick={()=>onEdit(item?.id)}/>}
-        </div>) : <></>}
+        </div>
             <Link to={`/category/${item?.data?.type}/${item?.id}`} className='categoryListingLink'>
                 <img 
                     src={item?.data?.imgUrls[0]} 
                     alt={item?.data?.name}
-                    className={auth.currentUser.uid !== item.data.userRef ? 'categoryListingImg toRight' : 'categoryListingImg toLeft'}
+                    className={'categoryListingImg'}
                 />
                 <div className='categoryListingDetails'>
                     <p className='categoryListingLocation'>

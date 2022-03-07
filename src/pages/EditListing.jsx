@@ -1,18 +1,20 @@
 import { useEffect, useRef, useState } from "react"
 import {getAuth, onAuthStateChanged} from 'firebase/auth'
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { Spinner } from "../components/Spinner";
 import { toast } from "react-toastify";
 import { getStorage, ref, uploadBytesResumable, getDownloadURL} from "firebase/storage";
 import {v4 as uuidv4} from 'uuid'
-import {addDoc, collection, serverTimestamp} from 'firebase/firestore'
+import {serverTimestamp, doc, updateDoc, getDoc} from 'firebase/firestore'
 import {db} from '../firebase.config'
 
 const API_URL="AIzaSyCU8A9UY3mqht9a8h9ZAPpvnWoSrvtoZzw"
 
-export const CreateListing  = () => {
+export const EditListing = () => {
     const [geolocationActive, setGeolocationActive] = useState(true);
     const [loading, setLoading] = useState(true);
+    // eslint-disable-next-line no-unused-vars
+    const [listing, setlisting] = useState(true);
     const [formData, setFormData] = useState({
         type: 'sell',
         name: '',
@@ -49,10 +51,33 @@ export const CreateListing  = () => {
     } = formData;
 
     const auth= getAuth();
+    const params = useParams();
     const navigate = useNavigate();
     const isMounted = useRef(true);
     console.log("User:", auth.currentUser?.displayName);
 
+    //fetch listing to edit
+    useEffect(()=>{
+        setLoading(true);
+        const fetchListing = async () => {
+            const docRef = doc(db, 'listings', params.listingId );
+            const docSnap = await getDoc(docRef);
+
+            if(docSnap.exists())
+            {
+                setlisting(docSnap.data());
+                setFormData({...docSnap.data(), address: docSnap.data().location});
+                setLoading(false);
+            }else{
+                navigate('/')
+                toast.error('Listing does not exist');
+            }
+        }
+        fetchListing();
+    },[params.listingId, navigate])
+
+
+    //sets the user to logged in
     useEffect(()=>{
         //if the user is authenticated
         if(isMounted){
@@ -121,7 +146,7 @@ export const CreateListing  = () => {
         if(offer && (discountedPrice>=regularPrice)){
             setLoading(false);
             toast.error("The regular price must be higher than the discounted price!");
-        }else if(images.length>6 || images.length<1){
+        }else if(images?.length>6 || images?.length<1){
             setLoading(false);
             toast.error("You must upload at least 1 image, but not more than 6!");
         }else if(name === ''){
@@ -157,7 +182,7 @@ export const CreateListing  = () => {
 
 
         const imgUrls = await Promise.all(
-            [...images].map((image) => storeImage(image))
+            [...images]?.map((image) => storeImage(image))
           ).catch(() => {
             setLoading(false)
             toast.error('Images not uploaded')
@@ -184,10 +209,11 @@ export const CreateListing  = () => {
         location && (listingCopy.location=location)
 
         //ADD THE NEW OBJ TO THE COLLECTION
-        const docRef = await addDoc(collection(db, 'listings'), listingCopy);
-        console.log('docRef:', docRef)
+        const docRef = doc(db, 'listings', params.listingId);
+        await updateDoc(docRef, listingCopy)
+        //console.log('docRef:', docRef)
         setLoading(false);
-        toast.success("Your listing has been uploaded!")
+        toast.success("Your listing has been updated!")
 
         console.log("user:", auth.currentUser?.displayName);
         navigate(`/category/${listingCopy.type}/${docRef.id}`);
@@ -228,7 +254,7 @@ export const CreateListing  = () => {
     return (loading) ? (<Spinner/>) : ( 
         <div className="profile">
             <header>
-                <p className="profileHeader">{auth.currentUser.displayName}, add a listing </p>
+                <p className="profileHeader">{auth.currentUser.displayName}, edit a listing </p>
             </header>
             <main>
                 <form>
@@ -481,7 +507,7 @@ export const CreateListing  = () => {
                     type='submit' 
                     className='primaryButton createListingButton' 
                     onClick={onSubmit}>
-                        Create Listing
+                        Update Listing
                     </button>
                     <button 
                     type='cancel' 
@@ -493,4 +519,4 @@ export const CreateListing  = () => {
             </main>
         </div>
     )
-};
+}

@@ -8,5 +8,9 @@ Technologies:
 Tools & PlugIns:
 * react-router v.6 
 * react-toastify
+* leaflet, react-leaflet v.1.7
+* swiper v.6.8.1
 * google cloud platform for GeoLocation API & Service 
-The token for the geolocation service can be changed in the CreateListing.jsx file
+
+
+Token for geolocation: AIzaSyCU8A9UY3mqht9a8h9ZAPpvnWoSrvtoZzw

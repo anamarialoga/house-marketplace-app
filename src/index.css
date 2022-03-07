@@ -72,6 +72,7 @@ button {
   justify-content: center;
 }
 
+
 .removeIcon {
   cursor: pointer;
   position: absolute;
@@ -101,7 +102,8 @@ button {
 .listingDetails,
 .category,
 .explore {
-  margin: 1rem;
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
 }
 
 @media (min-width: 1024px) {
@@ -111,7 +113,7 @@ button {
   .listingDetails,
   .category,
   .explore {
-    margin: 3rem;
+    padding: 1;
   }
 }
 
@@ -148,7 +150,6 @@ button {
 .pageHeader {
   font-size: 26px;
   font-weight: 800;
-  margin-left: 0.5cm;
   margin-top: 1cm;
   margin-bottom: 3rem;
   padding: 1rem;
@@ -162,13 +163,16 @@ button {
   margin-bottom: 3rem;
 }
 
+.exploreHeader {
+  font-size: 26px;
+  font-weight: 800;
+  margin-top: 1.5cm;
+  margin-bottom: 3rem;
+}
 
-.exploreHeader,
 .categoryHeader {
   font-size: 26px;
   font-weight: 800;
-  margin-left: 0.1cm;
-  margin-top: 1cm;
   margin-bottom: 3rem;
   padding: 1rem;
 }
@@ -411,8 +415,7 @@ button {
 .exploreHeading,
 .exploreCategoryHeading {
   font-weight: 700;
-  margin-left: 0.2cm;
-  padding-left: 1rem;
+  margin-left: 0.5cm;
 }
 
 .swiper-container {
@@ -496,16 +499,15 @@ button {
 }
 
 .categoryListings {
-  padding: 1rem;
-  margin-left: 0.2cm;
+  margin-right: 0.5cm;
 }
 
 .categoryListing {
   display: flex;
-  justify-content: space-between;
   align-items: center;
+  justify-content: space-between;
   margin-bottom: 1rem;
-  position: relative;
+  margin-left: -1cm;
 }
 
 .categoryListingLink {
@@ -514,9 +516,11 @@ button {
 
 .categoryListingImg {
   width: 30%;
-  height: 100px;
+  height: 120px;
   border-radius: 1.5rem;
   object-fit: cover;
+  margin-right: 0.5cm;
+  margin-left: -0.3cm;
 }
 @media (min-width: 1024px) {
   .categoryListingImg {
@@ -587,6 +591,7 @@ button {
 }
 
 .shareIconDiv {
+  margin-top: 1cm;
   cursor: pointer;
   position: fixed;
   top: 3%;
@@ -603,8 +608,11 @@ button {
 
 .listingName {
   font-weight: 600;
-  font-size: 1.5rem;
-  margin-bottom: 0.5rem;
+  font-size: 1.3rem;
+}
+.listingPrice {
+  font-weight: 600;
+  font-size: 1.2rem;
 }
 
 .listingLocation {
@@ -654,6 +662,7 @@ button {
   height: 200px;
   overflow-x: hidden;
   margin-bottom: 3rem;
+  margin-right: 0.5cm;
 }
 @media (min-width: 1024px) {
   .leafletContainer {
@@ -684,6 +693,7 @@ button {
 }
 
 .contactLandlord {
+  margin-left: 0.5cm;
   margin-top: 2rem;
   display: flex;
   align-items: center;
@@ -699,7 +709,9 @@ button {
 }
 
 .messageDiv {
-  margin-top: 2rem;
+  margin-left: 0.5cm;
+  margin-right: 0.5cm;
+  margin-top: 0.5rem;
   display: flex;
   flex-direction: column;
   margin-bottom: 4rem;
@@ -720,6 +732,7 @@ button {
   font-size: 1rem;
   font-weight: 600;
   color: #ffffff;
+  margin-top: 0.25cm;
   background-color: #00cc66;
   padding: 0.25rem 0.75rem;
   border-radius: 1rem;
@@ -778,7 +791,7 @@ button {
   border-radius: 1rem;
   padding: 0.25rem 1rem;
   box-shadow: rgba(0, 0, 0, 0.2);
-  margin-top: 4rem;
+  margin-top: 2.6rem;
   margin-left: 0.1cm;
   margin-right: 0.5cm;
   font-weight: 600;
@@ -854,6 +867,18 @@ button {
   margin-right: 3rem;
   padding: 0.9rem 0.7rem;
   text-align: center;
+}
+
+.sendMessage{
+  font-family: 'Montserrat', sans-serif;
+  background-color: #00cc66; 
+  width: 65%;
+  margin-left:2cm;
+  margin-right:2cm;
+  border-radius:1rem;
+  text-align: center;
+  font-size:24px;
+  font-weight:500;
 }
 
 .formInputName {
